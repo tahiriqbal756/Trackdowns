@@ -1,0 +1,16 @@
+# Exported from Render on 2024-09-25T05:26:26Z
+services:
+- type: web
+  name: trkn-trackdown
+  runtime: node
+  repo: https://github.com/tucommenceapousser/TrackDownV2
+  plan: free
+  envVars:
+  - key: SERVER_URL
+    sync: false
+  - key: bot
+    sync: false
+  region: oregon
+  buildCommand: npm install
+  startCommand: node index.js
+version: "1"
